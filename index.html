@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Дом фотографа — сеть фотостудий</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body{
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:#f4f4f8;
+      color:#222;
+      line-height:1.6;
+      scroll-behavior:smooth;
+    }
+    a{ text-decoration:none; color:inherit; }
+
+    header{
+      background:#111827;
+      color:#fff;
+      padding:15px 40px;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .header-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+    .logo{ font-size:1.4rem; font-weight:800; }
+    .logo span{ color:#fbbf24; }
+
+    nav ul{ list-style:none; display:flex; gap:14px; font-size:.9rem; flex-wrap:wrap; }
+    nav a{
+      padding:8px 12px;
+      border-radius:999px;
+      transition:background .2s,color .2s;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      white-space:nowrap;
+    }
+    nav a:hover{ background:#fbbf24; color:#111827; }
+
+    .hero{
+      background:linear-gradient(135deg,#111827 0%,#1f2937 50%,#fbbf24 130%);
+      color:#fff;
+      padding:60px 20px 40px;
+    }
+    .hero-inner{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.5fr);
+      gap:40px;
+      align-items:center;
+    }
+    .hero h1{ font-size:2.4rem; margin-bottom:15px; }
+    .hero p{ font-size:1.05rem; margin-bottom:20px; max-width:620px; }
+    .hero-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+    .hero-tag{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.4);
+      font-size:.85rem;
+      backdrop-filter:blur(4px);
+    }
+    .hero-cta{ display:flex; flex-wrap:wrap; gap:12px; }
+
+    .btn-primary{
+      background:#fbbf24;
+      color:#111827;
+      border:none;
+      padding:10px 20px;
+      border-radius:999px;
+      font-size:.95rem;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease;
+      box-shadow:0 10px 20px rgba(0,0,0,.2);
+    }
+    .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 14px 26px rgba(0,0,0,.25); }
+
+    .btn-outline{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.7);
+      color:#fff;
+      padding:10px 20px;
+      border-radius:999px;
+      font-size:.95rem;
+      cursor:pointer;
+      transition:background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .btn-outline:hover{ background:#fff; color:#111827; border-color:#fff; }
+
+    .btn-secondary{
+      background:#111827;
+      color:#fff;
+      border:none;
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .12s ease, filter .12s ease;
+    }
+    .btn-secondary:hover{ transform:translateY(-1px); filter:brightness(1.02); }
+
+    .hero-card{
+      background:rgba(17,24,39,.82);
+      border-radius:18px;
+      padding:20px;
+      backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 18px 40px rgba(0,0,0,.4);
+    }
+    .hero-card h3{ margin-bottom:10px; font-size:1.1rem; }
+    .hero-card-row{
+      display:flex;
+      justify-content:space-between;
+      font-size:.9rem;
+      margin-bottom:6px;
+      gap:12px;
+    }
+    .hero-card-row span:last-child{ opacity:.92; text-align:right; }
+    .hero-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:rgba(31,41,55,.9);
+      border-radius:999px;
+      padding:5px 10px;
+      font-size:.8rem;
+      margin-top:10px;
+    }
+    .hero-chip-dot{ width:10px; height:10px; border-radius:999px; background:#22c55e; }
+
+    main{ max-width:1200px; margin:30px auto 60px; padding:0 20px; }
+    section{ margin-bottom:50px; }
+    .section-title{ font-size:1.7rem; margin-bottom:10px; color:#111827; }
+    .section-subtitle{ font-size:.95rem; margin-bottom:18px; color:#4b5563; }
+
+    .card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .card{
+      background:#fff;
+      border-radius:16px;
+      padding:18px 18px 16px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+    }
+    .card-header{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; gap:10px; }
+    .card-title{ font-weight:800; font-size:1.05rem; }
+    .card-badge{
+      font-size:.75rem;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#fef3c7;
+      color:#92400e;
+      white-space:nowrap;
+    }
+    .muted{ font-size:.85rem; color:#6b7280; }
+
+    .pill-list{
+      list-style:none;
+      padding-left:0;
+      margin:0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:6px;
+    }
+    .pill-list .pill{
+      list-style:none;
+      display:inline-flex;
+      align-items:center;
+      font-size:.8rem;
+      padding:4px 9px;
+      border-radius:999px;
+      background:#f3f4f6;
+      color:#374151;
+    }
+
+    .info-layout{ display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1.1fr); gap:24px; align-items:start; }
+    .info-block{
+      background:#fff;
+      border-radius:16px;
+      padding:18px 18px 16px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+    }
+    .info-block h3{ font-size:1.1rem; margin-bottom:10px; }
+    .info-block ul{ list-style:disc; padding-left:18px; font-size:.9rem; color:#4b5563; }
+    .info-block li+li{ margin-top:5px; }
+
+    .map-container{ margin-top:10px; border-radius:14px; overflow:hidden; border:1px solid #e5e7eb; }
+    .map-container iframe{ width:100%; height:280px; border:0; }
+
+    .table{ width:100%; border-collapse:collapse; font-size:.9rem; margin-top:10px; }
+    .table th,.table td{ padding:8px 10px; border-bottom:1px solid #e5e7eb; text-align:left; }
+    .table th{ background:#f9fafb; font-weight:800; }
+    .table tfoot td{ font-weight:800; background:#f9fafb; }
+
+    .schedule{ margin-top:10px; font-size:.9rem; }
+    .schedule-row{ display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed #e5e7eb; gap:12px; }
+    .schedule-row:last-child{ border-bottom:none; }
+
+    /* Zones cards */
+    .zones-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+      margin-top:16px;
+    }
+    .zone-card{
+      background:#fff;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid #e5e7eb;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .zone-card img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      background:#e5e7eb;
+      display:block;
+    }
+    .zone-card-body{ padding:12px 14px; display:grid; gap:8px; }
+    .zone-card-body h4{ font-size:1rem; margin-bottom:2px; }
+    .zone-card-body p{ font-size:.85rem; color:#6b7280; margin:0; }
+    .zone-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+    .zone-actions button{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      cursor:pointer;
+      font-weight:800;
+      font-size:.86rem;
+    }
+    .zone-actions button:hover{ background:#f9fafb; }
+    .zone-actions .primary{ background:#111827; color:#fff; border-color:#111827; }
+    .zone-actions .primary:hover{ filter:brightness(1.02); }
+
+    /* Halls gallery cards */
+    .halls-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+    .hall-card{
+      background:#fff;
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .hall-cover{ width:100%; height:190px; object-fit:cover; background:#e5e7eb; display:block; }
+    .hall-body{ padding:14px 14px 16px; display:grid; gap:10px; }
+    .hall-title{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+    .hall-title h3{ font-size:1.05rem; }
+    .hall-tag{ font-size:.75rem; padding:4px 10px; border-radius:999px; background:#f3f4f6; color:#374151; white-space:nowrap; }
+    .hall-kv{ display:grid; gap:6px; font-size:.9rem; color:#374151; }
+    .kv{ display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed #e5e7eb; padding:4px 0; }
+    .kv:last-child{ border-bottom:none; }
+    .kv span:last-child{ font-weight:900; text-align:right; }
+    .hall-lists{ display:grid; gap:12px; }
+    .mini-title{ font-weight:900; font-size:.85rem; letter-spacing:.02em; color:#111827; }
+    .bullets{ padding-left:18px; color:#4b5563; font-size:.9rem; }
+    .bullets li+li{ margin-top:4px; }
+    .light-scheme{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:10px;
+      background:#f9fafb;
+      display:grid;
+      gap:8px;
+    }
+    .scheme-svg{ width:100%; height:130px; display:block; }
+
+    .thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .thumbs img{
+      width:100%;
+      height:80px;
+      object-fit:cover;
+      border-radius:10px;
+      cursor:pointer;
+      background:#e5e7eb;
+      border:1px solid #eef2f7;
+    }
+    .thumbs img:hover{ filter:brightness(1.02); }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:10000;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width:min(980px,100%);
+      background:#111827;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      box-shadow:0 18px 60px rgba(0,0,0,.45);
+      display:grid;
+      grid-template-rows:auto 1fr;
+    }
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      color:#fff;
+      background:rgba(0,0,0,.18);
+    }
+    .modal-title{ font-weight:900; }
+    .modal-close{
+      border:1px solid rgba(255,255,255,.2);
+      background:transparent;
+      color:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .modal-close:hover{ background:rgba(255,255,255,.08); }
+    .modal-main{ background:#0b1220; display:grid; gap:10px; padding:12px; }
+    .modal-main img{
+      width:100%;
+      height:min(60vh,520px);
+      object-fit:contain;
+      background:#0b1220;
+    }
+    .modal-nav{ display:flex; justify-content:space-between; gap:10px; }
+    .modal-nav button{
+      flex:1 1 0;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      border-radius:12px;
+      padding:10px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .modal-nav button:hover{ background:rgba(255,255,255,.1); }
+
+    /* Calculator */
+    .calc-grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:18px; align-items:start; }
+    .calc-row{ display:grid; grid-template-columns:1fr; gap:10px; }
+    .calc-inline{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .calc-options{ display:grid; gap:10px; margin-top:6px; }
+    .toggle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid #e5e7eb;
+      border-radius:12px;
+      background:#fff;
+    }
+    .toggle small{ color:#6b7280; }
+    .toggle input{ width:18px; height:18px; }
+
+    .total-box{
+      border-radius:16px;
+      border:1px solid #e5e7eb;
+      background:#111827;
+      color:#fff;
+      padding:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      display:grid;
+      gap:10px;
+    }
+    .total-big{ font-size:2rem; font-weight:1000; letter-spacing:.02em; }
+    .total-line{ display:flex; justify-content:space-between; gap:10px; font-size:.9rem; opacity:.95; }
+    .total-line span:last-child{ font-weight:900; }
+    .total-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+    .total-actions button{ flex:1 1 180px; }
+
+    /* Photographers */
+    .photographers-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .photographer-card{
+      background:#fff;
+      border-radius:16px;
+      padding:18px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .photographer-photo{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:12px;
+      background:#e5e7eb;
+      display:block;
+    }
+    .photographer-header{ display:flex; gap:12px; align-items:center; }
+    .photographer-avatar{
+      width:46px; height:46px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#fbbf24,#fb923c);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:1000; color:#111827;
+      flex:0 0 auto;
+    }
+    .photographer-name{ font-weight:900; font-size:1rem; }
+    .photographer-style{ font-size:.85rem; color:#6b7280; }
+    .price-list{ list-style:none; font-size:.9rem; color:#374151; padding-left:0; margin:0; }
+    .price-list li{ display:flex; justify-content:space-between; gap:12px; padding:3px 0; }
+    .price-list span:last-child{ font-weight:900; white-space:nowrap; }
+    .photographer-meta{ display:flex; justify-content:space-between; font-size:.8rem; color:#6b7280; margin-top:4px; gap:10px; }
+
+    /* Contacts + form */
+    .contacts-layout{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1.2fr); gap:24px; align-items:start; }
+    .contacts-card{
+      background:#fff;
+      border-radius:16px;
+      padding:18px 18px 16px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      border:1px solid #e5e7eb;
+    }
+    .contacts-card h3{ margin-bottom:10px; font-size:1.1rem; }
+    .contacts-list{ list-style:none; font-size:.9rem; color:#374151; padding-left:0; margin:0; }
+    .contacts-list li+li{ margin-top:6px; }
+    .contacts-label{ font-weight:900; margin-right:5px; }
+
+    .map-switch{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .map-switch button{
+      border:1px solid #e5e7eb;
+      background:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:.86rem;
+    }
+    .map-switch button.active{
+      background:#111827;
+      border-color:#111827;
+      color:#fff;
+    }
+    .route-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .route-actions a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:900;
+      border:1px solid #e5e7eb;
+      background:#fff;
+      cursor:pointer;
+    }
+    .route-actions a.primary{
+      background:#fbbf24;
+      border-color:#fbbf24;
+      color:#111827;
+    }
+    .route-actions a:hover{ filter:brightness(0.99); }
+
+    form{ display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; font-size:.9rem; }
+    .form-field{ display:flex; flex-direction:column; gap:4px; }
+    .form-field-full{ grid-column:1 / -1; }
+    label{ font-weight:900; color:#374151; }
+    input,select,textarea{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid #d1d5db;
+      font:inherit;
+      background:#f9fafb;
+      transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    input:focus,select:focus,textarea:focus{
+      outline:none;
+      border-color:#fbbf24;
+      box-shadow:0 0 0 1px #fbbf24;
+      background:#fff;
+    }
+    textarea{ resize:vertical; min-height:80px; }
+    .form-footer{
+      grid-column:1 / -1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-top:5px;
+    }
+    .form-note{ font-size:.8rem; color:#6b7280; }
+
+    /* FAQ */
+    .faq-grid{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; }
+    details.faq{
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      background:#fff;
+      padding:12px 14px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+    }
+    details.faq summary{
+      cursor:pointer;
+      font-weight:1000;
+      color:#111827;
+      list-style:none;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    details.faq summary::-webkit-details-marker{ display:none; }
+    .faq-icon{
+      width:26px; height:26px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:#f3f4f6;
+      color:#111827;
+      font-weight:1000;
+      flex:0 0 auto;
+    }
+    details.faq .faq-a{ margin-top:10px; color:#4b5563; font-size:.95rem; }
+    details[open].faq summary .faq-icon{ background:#fbbf24; }
+
+    /* Offers */
+    .offers-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .offer-card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:16px;
+      box-shadow:0 8px 20px rgba(15,23,42,.06);
+      display:grid;
+      gap:10px;
+    }
+    .offer-head{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+    .offer-title{ font-weight:1000; color:#111827; }
+    .offer-badge{ font-size:.75rem; padding:4px 10px; border-radius:999px; background:#ecfccb; color:#3f6212; white-space:nowrap; }
+    .offer-price{ font-size:1.6rem; font-weight:1000; color:#111827; }
+    .offer-note{ color:#6b7280; font-size:.9rem; }
+    .offer-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .offer-actions button{ flex:1 1 160px; }
+
+    /* VK Card */
+    .vk-card{
+      margin-top:14px;
+      border:1px solid #e5e7eb;
+      border-radius:16px;
+      padding:14px;
+      background:linear-gradient(135deg,#0b1220, #111827 60%, #1f2937);
+      color:#fff;
+      display:grid;
+      gap:10px;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+    }
+    .vk-top{ display:flex; align-items:center; gap:12px; }
+    .vk-badge{
+      width:44px; height:44px;
+      border-radius:14px;
+      background:#0077ff;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 10px 22px rgba(0,0,0,.22);
+      flex:0 0 auto;
+    }
+    .vk-badge svg{ width:24px; height:24px; fill:#fff; }
+    .vk-title{ font-weight:1000; }
+    .vk-sub{ color:rgba(255,255,255,.78); font-size:.9rem; }
+    .vk-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .vk-actions a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:1000;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+    }
+    .vk-actions a.primary{
+      background:#0077ff;
+      border-color:#0077ff;
+    }
+    .vk-actions a:hover{ background:rgba(255,255,255,.1); }
+    .vk-actions a.primary:hover{ filter:brightness(1.03); }
+
+    footer{
+      border-top:1px solid #e5e7eb;
+      padding:16px 20px;
+      text-align:center;
+      font-size:.85rem;
+      color:#6b7280;
+    }
+
+    /* Floating buttons */
+    .fab{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index:9999;
+    }
+    .fab a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:54px;
+      height:54px;
+      border-radius:999px;
+      color:#fff;
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.15);
+      transition:transform .15s ease, filter .15s ease;
+      font-size:12px;
+      font-weight:1000;
+      user-select:none;
+    }
+    .fab a:hover{ transform:translateY(-2px); filter:brightness(1.02); }
+    .fab a:active{ transform:translateY(0px); }
+    .fab a.wa{ background:#22c55e; }
+    .fab a.call{ background:#fbbf24; color:#111827; }
+    .fab a.vk{ background:#0077ff; }
+
+    @media (max-width:900px){
+      .hero-inner,.info-layout,.contacts-layout,.calc-grid{ grid-template-columns:1fr; }
+      header{ padding:12px 16px; }
+      .hero{ padding:32px 16px 28px; }
+      .hero h1{ font-size:2rem; }
+    }
+    @media (max-width:560px){
+      form{ grid-template-columns:1fr; }
+      .calc-inline{ grid-template-columns:1fr; }
+      .form-footer{ flex-direction:column; align-items:flex-start; }
+      .hero-card-row{ flex-direction:column; align-items:flex-start; }
+      .hero-card-row span:last-child{ text-align:left; }
+    }
+    @media (max-width:420px){
+      .hero-cta{ flex-direction:column; align-items:flex-start; }
+      .fab{ right:12px; bottom:12px; }
+      .fab a{ width:50px; height:50px; }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo">Дом <span>фотографа</span></div>
+    <nav>
+      <ul>
+        <li><a href="#about">О студии</a></li>
+        <li><a href="#halls">Галерея залов</a></li>
+        <li><a href="#prices">Прайс</a></li>
+        <li><a href="#calculator">Калькулятор</a></li>
+        <li><a href="#offers">Акции</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#photographers">Фотографы</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>«Дом фотографа» — фотостудия в Пятигорске</h1>
+      <p>
+        Залы, свет, реквизит и команда, которая помогает получить результат:
+        портреты, семья, love story, бизнес-контент и фото на документы.
+      </p>
+      <div class="hero-tags">
+        <div class="hero-tag">Февральская ул., 54 (А301), этаж 3</div>
+        <div class="hero-tag">Ежедневно 10:00–22:00</div>
+        <div class="hero-tag">VK: dom_photografa</div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('booking-form').scrollIntoView({behavior:'smooth'})">
+          Записаться
+        </button>
+        <button class="btn-outline" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+          Рассчитать стоимость
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>Филиал: Пятигорск</h3>
+      <div class="hero-card-row"><span>Адрес:</span><span>Февральская ул., 54 (А301), этаж 3</span></div>
+      <div class="hero-card-row"><span>График:</span><span>ежедневно 10:00–22:00</span></div>
+      <div class="hero-card-row"><span>Телефон:</span><span>+7 (938) 306-35-25</span></div>
+      <div class="hero-card-row"><span>VK:</span><span>vk.com/dom_photografa</span></div>
+      <div class="hero-chip"><span class="hero-chip-dot"></span><span>Запись на сегодня — по наличию окон</span></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">О фотостудии «Дом фотографа»</h2>
+    <p class="section-subtitle">
+      Мы делаем студию “под ключ”: свет, локации, реквизит и понятные тарифы. Хотите просто аренду — пожалуйста.
+      Нужен фотограф/ретушь/визажист — соберём пакет.
+    </p>
+
+    <div class="info-layout">
+      <div class="info-block">
+        <h3>Чем мы занимаемся</h3>
+        <ul>
+          <li>Аренда залов и фотозон по часам.</li>
+          <li>Индивидуальные, семейные, детские и love story фотосессии.</li>
+          <li>Контент-съёмка для личного бренда и бизнеса.</li>
+          <li>Фото на документы: паспорт РФ, загранпаспорт, визы, военный билет и др.</li>
+          <li>Аренда студии для видео, live-эфиров и мастер-классов.</li>
+        </ul>
+
+        <h3 style="margin-top:14px;">Быстрый выбор зала</h3>
+        <div class="zones-grid">
+          <div class="zone-card">
+            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Светлый+дом" alt="Светлый дом" loading="lazy">
+            <div class="zone-card-body">
+              <div>
+                <h4>«Светлый дом»</h4>
+                <p>Минимализм, натуральный свет, пастельные тона.</p>
+              </div>
+              <div class="zone-actions">
+                <button class="primary" type="button" onclick="openHallGallery('svetly')">Смотреть фото</button>
+                <button type="button" onclick="prefillBooking({service:'zone', hall:'Светлый дом', hours:1})">Забронировать</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Лофт" alt="Лофт" loading="lazy">
+            <div class="zone-card-body">
+              <div>
+                <h4>«Лофт»</h4>
+                <p>Кирпич, неон, тёплый свет, фактурные кадры.</p>
+              </div>
+              <div class="zone-actions">
+                <button class="primary" type="button" onclick="openHallGallery('loft')">Смотреть фото</button>
+                <button type="button" onclick="prefillBooking({service:'zone', hall:'Лофт', hours:1})">Забронировать</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Классика" alt="Классика" loading="lazy">
+            <div class="zone-card-body">
+              <div>
+                <h4>«Классика»</h4>
+                <p>Колонны, текстиль, деловой и премиум-образ.</p>
+              </div>
+              <div class="zone-actions">
+                <button class="primary" type="button" onclick="openHallGallery('classic')">Смотреть фото</button>
+                <button type="button" onclick="prefillBooking({service:'zone', hall:'Классика', hours:1})">Забронировать</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="zone-card">
+            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Family" alt="Family" loading="lazy">
+            <div class="zone-card-body">
+              <div>
+                <h4>«Family»</h4>
+                <p>Уютная домашняя атмосфера — семья, дети, love story.</p>
+              </div>
+              <div class="zone-actions">
+                <button class="primary" type="button" onclick="openHallGallery('family')">Смотреть фото</button>
+                <button type="button" onclick="prefillBooking({service:'zone', hall:'Family', hours:1})">Забронировать</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="pill-list" style="margin-top:12px;">
+          <li class="pill">Постоянный свет</li>
+          <li class="pill">Импульс (по запросу)</li>
+          <li class="pill">Фоны</li>
+          <li class="pill">Гримерное место</li>
+          <li class="pill">Wi‑Fi / музыка</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h3>Где мы находимся</h3>
+        <p class="muted">
+          Адрес: <strong>Февральская ул., 54, Пятигорск (А301, этаж 3)</strong>.
+          Ниже — карта и быстрые кнопки маршрута.
+        </p>
+
+        <div class="map-switch" role="tablist" aria-label="Выбор карты">
+          <button type="button" id="btnMapGoogle" class="active" onclick="switchMap('google')">Google</button>
+          <button type="button" id="btnMapYandex" onclick="switchMap('yandex')">Yandex</button>
+        </div>
+
+        <div class="map-container" id="mapGoogle">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.,%2054,%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20(%D0%90%D0%A301,%20%D1%8D%D1%82%D0%B0%D0%B6%203)&output=embed">
+          </iframe>
+        </div>
+
+        <div class="map-container" id="mapYandex" style="display:none;">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://yandex.ru/map-widget/v1/?text=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%2C%20%D0%90%D0%A301%2C%203%20%D1%8D%D1%82%D0%B0%D0%B6&z=16">
+          </iframe>
+        </div>
+
+        <div class="route-actions">
+          <a class="primary" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/dir/?api=1&destination=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20(%D0%90%D0%A301%2C%20%D1%8D%D1%82%D0%B0%D0%B6%203)">
+            Построить маршрут (Google)
+          </a>
+          <a target="_blank" rel="noopener"
+             href="https://yandex.ru/maps/?rtext=~%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20%D0%90%D0%A301%20%D1%8D%D1%82%D0%B0%D0%B6%203&z=16">
+            Построить маршрут (Yandex)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HALLS -->
+  <section id="halls">
+    <h2 class="section-title">Галерея по залам</h2>
+    <p class="section-subtitle">
+      В каждом зале: фото (заглушки — заменишь на свои), размеры, что входит, реквизит и схема света.
+    </p>
+
+    <div class="halls-grid">
+      <!-- Svetly -->
+      <article class="hall-card">
+        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Светлый+дом" alt="Зал Светлый дом" loading="lazy">
+        <div class="hall-body">
+          <div class="hall-title">
+            <h3>«Светлый дом»</h3>
+            <span class="hall-tag">естественный свет</span>
+          </div>
+          <div class="hall-kv">
+            <div class="kv"><span>Площадь</span><span>45 м²</span></div>
+            <div class="kv"><span>Потолки</span><span>3.2 м</span></div>
+            <div class="kv"><span>Макс. гостей</span><span>до 6</span></div>
+          </div>
+
+          <div class="hall-lists">
+            <div>
+              <div class="mini-title">Что входит</div>
+              <ul class="bullets">
+                <li>Постоянный свет + стойки</li>
+                <li>1 большой отражатель</li>
+                <li>2 бумажных фона (по наличию)</li>
+              </ul>
+            </div>
+            <div>
+              <div class="mini-title">Реквизит</div>
+              <ul class="bullets">
+                <li>кресло, пуф, столик</li>
+                <li>растения, декор</li>
+                <li>текстиль</li>
+              </ul>
+            </div>
+
+      
+
+            <div class="thumbs" data-hall="svetly">
+              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+1" alt="Светлый дом 1" loading="lazy" onclick="openFromThumb('svetly',0)">
+              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+2" alt="Светлый дом 2" loading="lazy" onclick="openFromThumb('svetly',1)">
+              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+3" alt="Светлый дом 3" loading="lazy" onclick="openFromThumb('svetly',2)">
+            </div>
+
+            <div class="zone-actions">
+              <button class="primary" type="button" onclick="openHallGallery('svetly')">Открыть галерею</button>
+              <button type="button" onclick="prefillCalc({hall:'Светлый дом', hours:2})">Рассчитать</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Loft -->
+      <article class="hall-card">
+        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Лофт" alt="Зал Лофт" loading="lazy">
+        <div class="hall-body">
+          <div class="hall-title">
+            <h3>«Лофт»</h3>
+            <span class="hall-tag">фактура / неон</span>
+          </div>
+          <div class="hall-kv">
+            <div class="kv"><span>Площадь</span><span>55 м²</span></div>
+            <div class="kv"><span>Потолки</span><span>3.4 м</span></div>
+            <div class="kv"><span>Макс. гостей</span><span>до 8</span></div>
+          </div>
+
+          <div class="hall-lists">
+            <div>
+              <div class="mini-title">Что входит</div>
+              <ul class="bullets">
+                <li>2 импульсных источника (по запросу)</li>
+                <li>софтбокс + стойки</li>
+                <li>дым-машина (по запросу)</li>
+              </ul>
+            </div>
+            <div>
+              <div class="mini-title">Реквизит</div>
+              <ul class="bullets">
+                <li>барный стул, кресло</li>
+                <li>неон / гирлянды</li>
+                <li>металл / кирпич</li>
+              </ul>
+            </div>
+
+            
+
+            <div class="thumbs" data-hall="loft">
+              <img src="https://via.placeholder.com/900x600?text=Лофт+1" alt="Лофт 1" loading="lazy" onclick="openFromThumb('loft',0)">
+              <img src="https://via.placeholder.com/900x600?text=Лофт+2" alt="Лофт 2" loading="lazy" onclick="openFromThumb('loft',1)">
+              <img src="https://via.placeholder.com/900x600?text=Лофт+3" alt="Лофт 3" loading="lazy" onclick="openFromThumb('loft',2)">
+            </div>
+
+            <div class="zone-actions">
+              <button class="primary" type="button" onclick="openHallGallery('loft')">Открыть галерею</button>
+              <button type="button" onclick="prefillCalc({hall:'Лофт', hours:2})">Рассчитать</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Classic -->
+      <article class="hall-card">
+        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Классика" alt="Зал Классика" loading="lazy">
+        <div class="hall-body">
+          <div class="hall-title">
+            <h3>«Классика»</h3>
+            <span class="hall-tag">деловой стиль</span>
+          </div>
+          <div class="hall-kv">
+            <div class="kv"><span>Площадь</span><span>40 м²</span></div>
+            <div class="kv"><span>Потолки</span><span>3.0 м</span></div>
+            <div class="kv"><span>Макс. гостей</span><span>до 5</span></div>
+          </div>
+
+          <div class="hall-lists">
+            <div>
+              <div class="mini-title">Что входит</div>
+              <ul class="bullets">
+                <li>фоны: серый/чёрный (по наличию)</li>
+                <li>софтбокс + отражатель</li>
+                <li>постоянный свет для видео</li>
+              </ul>
+            </div>
+            <div>
+              <div class="mini-title">Реквизит</div>
+              <ul class="bullets">
+                <li>стол, стул, кресло</li>
+                <li>книги / декор</li>
+                <li>деловые аксессуары</li>
+              </ul>
+            </div>
+
+            
+
+            <div class="thumbs" data-hall="classic">
+              <img src="https://via.placeholder.com/900x600?text=Классика+1" alt="Классика 1" loading="lazy" onclick="openFromThumb('classic',0)">
+              <img src="https://via.placeholder.com/900x600?text=Классика+2" alt="Классика 2" loading="lazy" onclick="openFromThumb('classic',1)">
+              <img src="https://via.placeholder.com/900x600?text=Классика+3" alt="Классика 3" loading="lazy" onclick="openFromThumb('classic',2)">
+            </div>
+
+            <div class="zone-actions">
+              <button class="primary" type="button" onclick="openHallGallery('classic')">Открыть галерею</button>
+              <button type="button" onclick="prefillCalc({hall:'Классика', hours:2})">Рассчитать</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Family -->
+      <article class="hall-card">
+        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Family" alt="Зал Family" loading="lazy">
+        <div class="hall-body">
+          <div class="hall-title">
+            <h3>«Family»</h3>
+            <span class="hall-tag">семейные съёмки</span>
+          </div>
+          <div class="hall-kv">
+            <div class="kv"><span>Площадь</span><span>50 м²</span></div>
+            <div class="kv"><span>Потолки</span><span>3.1 м</span></div>
+            <div class="kv"><span>Макс. гостей</span><span>до 7</span></div>
+          </div>
+
+          <div class="hall-lists">
+            <div>
+              <div class="mini-title">Что входит</div>
+              <ul class="bullets">
+                <li>постоянный свет + стойки</li>
+                <li>мягкий софтбокс</li>
+                <li>детские аксессуары (по наличию)</li>
+              </ul>
+            </div>
+            <div>
+              <div class="mini-title">Реквизит</div>
+              <ul class="bullets">
+                <li>диван / кровать / пледы</li>
+                <li>игрушки / корзины</li>
+                <li>гирлянды / декор</li>
+              </ul>
+            </div>
+
+            
+
+            <div class="thumbs" data-hall="family">
+              <img src="https://via.placeholder.com/900x600?text=Family+1" alt="Family 1" loading="lazy" onclick="openFromThumb('family',0)">
+              <img src="https://via.placeholder.com/900x600?text=Family+2" alt="Family 2" loading="lazy" onclick="openFromThumb('family',1)">
+              <img src="https://via.placeholder.com/900x600?text=Family+3" alt="Family 3" loading="lazy" onclick="openFromThumb('family',2)">
+            </div>
+
+            <div class="zone-actions">
+              <button class="primary" type="button" onclick="openHallGallery('family')">Открыть галерею</button>
+              <button type="button" onclick="prefillCalc({hall:'Family', hours:2})">Рассчитать</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRICES -->
+  <section id="prices">
+    <h2 class="section-title">Прайс и расписание</h2>
+    <p class="section-subtitle">
+      Студия работает ежедневно с 10:00 до 22:00. Ниже — базовые тарифы. Точный расчёт — в калькуляторе.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Аренда залов</div>
+            <p class="muted">Цена за 1 час, минимум — 1 час.</p>
+          </div>
+          <span class="card-badge">Залы</span>
+        </div>
+        <table class="table">
+          <thead>
+            <tr><th>Зал</th><th>Будни</th><th>Выходные</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>«Светлый дом»</td><td>1 300 ₽/час</td><td>1 500 ₽/час</td></tr>
+            <tr><td>«Лофт»</td><td>1 400 ₽/час</td><td>1 600 ₽/час</td></tr>
+            <tr><td>«Классика»</td><td>1 500 ₽/час</td><td>1 700 ₽/час</td></tr>
+            <tr><td>«Family»</td><td>1 300 ₽/час</td><td>1 500 ₽/час</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="3">Каждый 5-й час аренды — в подарок (при разовой брони от 5 часов).</td></tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">График работы</div>
+            <p class="muted">Ежедневно.</p>
+          </div>
+          <span class="card-badge">Режим дня</span>
+        </div>
+
+        <div class="schedule">
+          <div class="schedule-row"><span>Понедельник — Воскресенье</span><span>10:00 — 22:00</span></div>
+        </div>
+
+        <p class="muted" style="margin-top:10px;">
+          Перенос/отмена без штрафа — за 24 часа. Для больших групп — согласуем отдельно.
+        </p>
+
+        <ul class="pill-list" style="margin-top:10px;">
+          <li class="pill">Онлайн‑бронь</li>
+          <li class="pill">Предоплата</li>
+          <li class="pill">Перенос за 24 часа</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Фото на документы</div>
+            <p class="muted">Готовность от 15 до 30 минут.</p>
+          </div>
+          <span class="card-badge">Документы</span>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr><td>Паспорт РФ (3×4, печать + файл)</td><td>350 ₽</td></tr>
+            <tr><td>Загранпаспорт / визы</td><td>450 ₽</td></tr>
+            <tr><td>Военный билет</td><td>400 ₽</td></tr>
+            <tr><td>Студенческий / пропуск</td><td>300 ₽</td></tr>
+            <tr><td>Комплект «Все документы» (3 вида)</td><td>990 ₽</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top:8px;">
+          Возможна лёгкая ретушь и отправка файла на телефон/почту.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Готовые фотосеты</div>
+            <p class="muted">Цена с работой фотографа и аренды зала.</p>
+          </div>
+          <span class="card-badge">Фотосессии</span>
+        </div>
+        <ul class="price-list">
+          <li><span>Индивидуальная (1 час, 20 фото с ретушью)</span><span>4 500 ₽</span></li>
+          <li><span>Love story (1,5 часа, 25 фото)</span><span>6 500 ₽</span></li>
+          <li><span>Семейная (1,5 часа, 30 фото)</span><span>7 000 ₽</span></li>
+          <li><span>Контент для бизнеса (2 часа, 40 фото)</span><span>9 500 ₽</span></li>
+        </ul>
+        <p class="muted" style="margin-top:8px;">
+          Для точной стоимости по вашим параметрам — используйте калькулятор.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="calculator">
+    <h2 class="section-title">Калькулятор цены</h2>
+    <p class="section-subtitle">“Зал + часы + фотограф + ретушь + визажист” → итог.</p>
+
+    <div class="card">
+      <div class="calc-grid">
+        <div class="calc-row">
+          <div class="calc-inline">
+            <div class="form-field">
+              <label for="calcHall">Зал</label>
+              <select id="calcHall">
+                <option value="Светлый дом">Светлый дом</option>
+                <option value="Лофт">Лофт</option>
+                <option value="Классика">Классика</option>
+                <option value="Family">Family</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="calcHours">Часы аренды</label>
+              <select id="calcHours">
+                <option value="1">1 час</option>
+                <option value="2">2 часа</option>
+                <option value="3">3 часа</option>
+                <option value="4">4 часа</option>
+                <option value="5">5 часов</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-inline">
+            <div class="form-field">
+              <label for="calcPhotographer">Фотограф</label>
+              <select id="calcPhotographer">
+                <option value="none">Без фотографа (только аренда)</option>
+                <option value="anna">Анна Ковалева</option>
+                <option value="dmitry">Дмитрий Мельник</option>
+                <option value="kate">Екатерина Власова</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="calcPhotoHours">Часы фотографа</label>
+              <select id="calcPhotoHours">
+                <option value="1">1 час</option>
+                <option value="2">2 часа</option>
+                <option value="3">3 часа</option>
+                <option value="4">4 часа</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-options">
+            <div class="toggle">
+              <div>
+                <strong>Ретушь</strong><br>
+                <small>пакет обработанных фото</small>
+              </div>
+              <select id="calcRetouch">
+                <option value="0">Без ретуши</option>
+                <option value="10">10 фото (+1 500 ₽)</option>
+                <option value="20">20 фото (+2 800 ₽)</option>
+                <option value="30">30 фото (+3 900 ₽)</option>
+              </select>
+            </div>
+
+            <div class="toggle">
+              <div>
+                <strong>Визажист</strong><br>
+                <small>макияж + базовая укладка</small>
+              </div>
+              <input id="calcMakeup" type="checkbox">
+            </div>
+
+            <div class="toggle">
+              <div>
+                <strong>Выходной день</strong><br>
+                <small>применяет тариф выходного</small>
+              </div>
+              <input id="calcWeekend" type="checkbox">
+            </div>
+
+            <div class="toggle">
+              <div>
+                <strong>Акция “5-й час в подарок”</strong><br>
+                <small>работает при аренде ≥ 5 часов</small>
+              </div>
+              <input id="calcFreeHour" type="checkbox" checked>
+            </div>
+          </div>
+
+          <div class="muted" style="margin-top:6px;">
+            * Все цены примерные (настрой в JS в объекте PRICES).
+          </div>
+        </div>
+
+        <div class="total-box">
+          <div class="total-line"><span>Аренда зала</span><span id="sumHall">0 ₽</span></div>
+          <div class="total-line"><span>Фотограф</span><span id="sumPhotographer">0 ₽</span></div>
+          <div class="total-line"><span>Ретушь</span><span id="sumRetouch">0 ₽</span></div>
+          <div class="total-line"><span>Визажист</span><span id="sumMakeup">0 ₽</span></div>
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,.18);">
+          <div class="total-line"><span>Итого</span><span class="total-big" id="sumTotal">0 ₽</span></div>
+          <div class="muted" style="color:rgba(255,255,255,.8);">Можно перенести расчёт в форму записи.</div>
+
+          <div class="total-actions">
+            <button class="btn-primary" type="button" onclick="applyCalcToBooking()">Перенести в запись</button>
+            <button class="btn-secondary" type="button" onclick="document.getElementById('booking-form').scrollIntoView({behavior:'smooth'})">Записаться</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERS -->
+  <section id="offers">
+    <h2 class="section-title">Акции и абонементы</h2>
+    <p class="section-subtitle">Пакеты (цены — заглушки, меняй под себя).</p>
+
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div class="offer-head">
+          <div class="offer-title">Абонемент “5 часов”</div>
+          <div class="offer-badge">-10%</div>
+        </div>
+        <div class="offer-price">5 900 ₽</div>
+        <div class="offer-note">Для контента, портфолио и тестовых съёмок.</div>
+        <ul class="bullets">
+          <li>5 часов аренды (любой зал)</li>
+          <li>перенос 1 раза без штрафа</li>
+          <li>срок действия: 30 дней</li>
+        </ul>
+        <div class="offer-actions">
+          <button class="btn-primary" type="button" onclick="prefillBooking({service:'zone', hours:5, comment:'Хочу абонемент “5 часов”'})">Оставить заявку</button>
+          <button class="btn-secondary" type="button" onclick="prefillCalc({hours:5})">Рассчитать</button>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-head">
+          <div class="offer-title">Абонемент “10 часов”</div>
+          <div class="offer-badge">-15%</div>
+        </div>
+        <div class="offer-price">10 900 ₽</div>
+        <div class="offer-note">Для регулярного контента: блог/маркетплейсы/каталоги.</div>
+        <ul class="bullets">
+          <li>10 часов аренды</li>
+          <li>2 переноса без штрафа</li>
+          <li>срок действия: 60 дней</li>
+        </ul>
+        <div class="offer-actions">
+          <button class="btn-primary" type="button" onclick="prefillBooking({service:'zone', hours:5, comment:'Хочу абонемент “10 часов”'})">Оставить заявку</button>
+          <button class="btn-secondary" type="button" onclick="prefillCalc({hours:5})">Рассчитать</button>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-head">
+          <div class="offer-title">“Портфолио‑модель”</div>
+          <div class="offer-badge">выгодно</div>
+        </div>
+        <div class="offer-price">3 500 ₽</div>
+        <div class="offer-note">Под соцсети / визитку / кастинг.</div>
+        <ul class="bullets">
+          <li>60 минут (зал + фотограф)</li>
+          <li>10 фото с ретушью</li>
+          <li>готовность: 5–7 дней</li>
+        </ul>
+        <div class="offer-actions">
+          <button class="btn-primary" type="button" onclick="prefillBooking({service:'set', comment:'Пакет “Портфолио‑модель”'})">Оставить заявку</button>
+          <button class="btn-secondary" type="button" onclick="prefillCalc({hall:'Светлый дом', hours:1})">Рассчитать</button>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-head">
+          <div class="offer-title">“Фото на документы — семейный комплект”</div>
+          <div class="offer-badge">-20%</div>
+        </div>
+        <div class="offer-price">1 190 ₽</div>
+        <div class="offer-note">2–3 человека, разные виды документов.</div>
+        <ul class="bullets">
+          <li>до 3 человек</li>
+          <li>до 3 видов документов</li>
+          <li>файл на телефон включён</li>
+        </ul>
+        <div class="offer-actions">
+          <button class="btn-primary" type="button" onclick="prefillBooking({service:'documents', docType:'Паспорт РФ', comment:'Хочу семейный комплект документов'})">Оставить заявку</button>
+          <button class="btn-secondary" type="button" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Записаться</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-subtitle">Ответы на популярные вопросы.</p>
+
+    <div class="faq-grid">
+      <details class="faq">
+        <summary><span>Можно ли с животными?</span><span class="faq-icon">+</span></summary>
+        <div class="faq-a">
+          Да, можно с небольшими и спокойными питомцами. Предупредите заранее и возьмите пелёнку/переноску.
+          За сильные загрязнения может быть удержана часть залога на уборку.
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span>Сколько человек можно в зал?</span><span class="faq-icon">+</span></summary>
+        <div class="faq-a">
+          В среднем 5–8 человек (зависит от зала). Лимит указан в карточке каждого зала в «Галерее».
+          Для больших групп — согласуем отдельно.
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span>Что по оплате/возврату?</span><span class="faq-icon">+</span></summary>
+        <div class="faq-a">
+          Обычно запись подтверждается предоплатой. Перенос/отмена без штрафа — за 24 часа.
+          Правила можно уточнить у администратора при подтверждении записи.
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span>Как подготовиться к съёмке?</span><span class="faq-icon">+</span></summary>
+        <div class="faq-a">
+          Возьмите 2–3 комплекта одежды без крупных логотипов, базовую косметику/пудру.
+          Приходите за 10–15 минут. Визажист — по желанию (можно включить в калькулятор).
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- PHOTOGRAPHERS -->
+  <section id="photographers">
+    <h2 class="section-title">Наши фотографы</h2>
+    <p class="section-subtitle">Фото — заглушки (заменишь на реальные).</p>
+
+    <div class="photographers-grid">
+      <div class="photographer-card">
+        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Анна+Ковалева" alt="Анна Ковалева" loading="lazy">
+        <div class="photographer-header">
+          <div class="photographer-avatar">АК</div>
+          <div>
+            <div class="photographer-name">Анна Ковалева</div>
+            <div class="photographer-style">Портрет, fashion, контент-съёмка</div>
+          </div>
+        </div>
+        <ul class="price-list">
+          <li><span>Индивидуальная (1 час)</span><span>5 000 ₽</span></li>
+          <li><span>Контент (2 часа)</span><span>9 500 ₽</span></li>
+          <li><span>Экспресс-портрет (30 мин)</span><span>3 000 ₽</span></li>
+        </ul>
+        <div class="photographer-meta"><span>Стаж: 6 лет</span><span>Готовность: 7 дней</span></div>
+        <div class="zone-actions">
+          <button class="primary" type="button" onclick="prefillCalc({photographer:'anna'})">Рассчитать</button>
+          <button type="button" onclick="prefillBooking({service:'set', photographer:'Анна Ковалева'})">Записаться</button>
+        </div>
+      </div>
+
+      <div class="photographer-card">
+        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Дмитрий+Мельник" alt="Дмитрий Мельник" loading="lazy">
+        <div class="photographer-header">
+          <div class="photographer-avatar">ДМ</div>
+          <div>
+            <div class="photographer-name">Дмитрий Мельник</div>
+            <div class="photographer-style">Семейные, love story, события</div>
+          </div>
+        </div>
+        <ul class="price-list">
+          <li><span>Семейная (1,5 часа)</span><span>7 500 ₽</span></li>
+          <li><span>Love story (1,5 часа)</span><span>6 900 ₽</span></li>
+          <li><span>Детская (1 час)</span><span>5 800 ₽</span></li>
+        </ul>
+        <div class="photographer-meta"><span>Стаж: 8 лет</span><span>Готовность: 10 дней</span></div>
+        <div class="zone-actions">
+          <button class="primary" type="button" onclick="prefillCalc({photographer:'dmitry'})">Рассчитать</button>
+          <button type="button" onclick="prefillBooking({service:'set', photographer:'Дмитрий Мельник'})">Записаться</button>
+        </div>
+      </div>
+
+      <div class="photographer-card">
+        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Екатерина+Власова" alt="Екатерина Власова" loading="lazy">
+        <div class="photographer-header">
+          <div class="photographer-avatar">ЕВ</div>
+          <div>
+            <div class="photographer-name">Екатерина Власова</div>
+            <div class="photographer-style">Документы, деловой портрет</div>
+          </div>
+        </div>
+        <ul class="price-list">
+          <li><span>Документы (комплект)</span><span>от 900 ₽</span></li>
+          <li><span>Деловой портрет (45 мин)</span><span>4 200 ₽</span></li>
+          <li><span>Корпоративная</span><span>от 7 000 ₽</span></li>
+        </ul>
+        <div class="photographer-meta"><span>Стаж: 5 лет</span><span>Готовность: 3–5 дней</span></div>
+        <div class="zone-actions">
+          <button class="primary" type="button" onclick="prefillCalc({photographer:'kate'})">Рассчитать</button>
+          <button type="button" onclick="prefillBooking({service:'documents', photographer:'Екатерина Власова'})">Записаться</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section id="contacts">
+    <h2 class="section-title">Контакты и онлайн‑запись</h2>
+    <p class="section-subtitle">
+      Оставьте заявку — она сформируется и отправится на почту <strong>d2991896@gmail.com</strong> (через mailto, без сервера).
+    </p>
+
+    <div class="contacts-layout">
+      <div class="contacts-card">
+        <h3>Филиал «Дом фотографа» — Пятигорск</h3>
+
+        <ul class="contacts-list">
+          <li><span class="contacts-label">Адрес:</span> Февральская ул., 54, Пятигорск (А301, этаж 3)</li>
+          <li><span class="contacts-label">Телефон:</span> <a href="tel:+79383063525">+7 (938) 306-35-25</a></li>
+          <li><span class="contacts-label">График:</span> ежедневно, 10:00–22:00</li>
+          <li><span class="contacts-label">VK:</span> <a href="https://vk.com/dom_photografa" target="_blank" rel="noopener">vk.com/dom_photografa</a></li>
+          <li><span class="contacts-label">E‑mail:</span> d2991896@gmail.com</li>
+        </ul>
+
+        <div class="vk-card" aria-label="Карточка ВКонтакте">
+          <div class="vk-top">
+            <div class="vk-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12.74 16.2c.39 0 .54-.31.54-.31s.08-.16.08-.5v-1.63s.01-.46.2-.67c.18-.2.42-.29.58-.32.14-.03.83-.02 1.66 1.11.74 1.02 1.29 2.34 2.61 2.34h1.72s1.03-.06.54-.89c-.04-.07-.29-.61-1.49-1.72-1.25-1.15-1.08-.97.42-2.97.91-1.21 1.28-1.95 1.17-2.27-.11-.31-.76-.23-.76-.23h-1.93s-.14-.02-.24.04c-.1.06-.16.2-.16.2s-.31.84-.72 1.55c-.88 1.52-1.23 1.6-1.37 1.51-.32-.21-.24-.84-.24-1.29 0-1.4.21-1.98-.41-2.13-.21-.05-.37-.09-.91-.1-.7-.01-1.29.01-1.63.18-.23.12-.4.39-.3.41.13.02.42.08.57.3.19.27.18.88.18.88s.11 1.65-.26 1.86c-.25.14-.6-.15-1.35-1.54-.38-.7-.66-1.48-.66-1.48s-.05-.13-.14-.2c-.11-.07-.26-.1-.26-.1H3.99s-.29 0-.4.12c-.1.11-.01.34-.01.34S4.6 11.06 6 13.15c1.29 1.93 3.11 3.05 3.11 3.05s.18.1.49.1h.65c.31 0 .47-.28.47-.28s.07-.16.07-.39c0-.35.02-.81.33-.96.37-.18.85.17 1.35.66 1.12 1.12 1.03 1.27 1.27 1.27z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="vk-title">Мы во ВКонтакте</div>
+              <div class="vk-sub">Новости, свободные окна, примеры работ и акции</div>
+            </div>
+          </div>
+          <div class="vk-actions">
+            <a class="primary" href="https://vk.com/dom_photografa" target="_blank" rel="noopener">Открыть группу</a>
+            <a href="https://vk.com/dom_photografa" target="_blank" rel="noopener">Написать в VK</a>
+          </div>
+        </div>
+
+        <div class="map-switch" role="tablist" aria-label="Выбор карты (контакты)">
+          <button type="button" id="btnMapGoogle2" class="active" onclick="switchMap('google', true)">Google</button>
+          <button type="button" id="btnMapYandex2" onclick="switchMap('yandex', true)">Yandex</button>
+        </div>
+
+        <div class="map-container" id="mapGoogle2">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.,%2054,%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20(%D0%90%D0%A301,%20%D1%8D%D1%82%D0%B0%D0%B6%203)&output=embed">
+          </iframe>
+        </div>
+
+        <div class="map-container" id="mapYandex2" style="display:none;">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://yandex.ru/map-widget/v1/?text=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%2C%20%D0%90%D0%A301%2C%203%20%D1%8D%D1%82%D0%B0%D0%B6&z=16">
+          </iframe>
+        </div>
+
+        <div class="route-actions">
+          <a class="primary" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/dir/?api=1&destination=%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20(%D0%90%D0%A301%2C%20%D1%8D%D1%82%D0%B0%D0%B6%203)">
+            Построить маршрут (Google)
+          </a>
+          <a target="_blank" rel="noopener"
+             href="https://yandex.ru/maps/?rtext=~%D0%A4%D0%B5%D0%B2%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2054%2C%20%D0%9F%D1%8F%D1%82%D0%B8%D0%B3%D0%BE%D1%80%D1%81%D0%BA%20%D0%90%D0%A301%20%D1%8D%D1%82%D0%B0%D0%B6%203&z=16">
+            Построить маршрут (Yandex)
+          </a>
+        </div>
+
+        <ul class="pill-list" style="margin-top:10px;">
+          <li class="pill">Онлайн‑запись</li>
+          <li class="pill">Фото на документы</li>
+          <li class="pill">Аренда залов</li>
+          <li class="pill">Работа с фотографом</li>
+        </ul>
+
+        <p class="muted" style="margin-top:10px;">
+          Вход со стороны бизнес‑центра. Если нужно — подскажем, как пройти.
+        </p>
+      </div>
+
+      <div class="contacts-card" id="booking-form">
+        <h3>Онлайн‑запись</h3>
+
+        <form id="formBooking">
+          <div class="form-field">
+            <label for="name">Имя *</label>
+            <input type="text" id="name" name="name" required placeholder="Как к вам обращаться?">
+          </div>
+
+          <div class="form-field">
+            <label for="phone">Телефон *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__">
+          </div>
+
+          <div class="form-field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Для ответа (по желанию)">
+          </div>
+
+          <div class="form-field">
+            <label for="service">Тип услуги *</label>
+            <select id="service" name="service" required>
+              <option value="">Выберите из списка</option>
+              <option value="zone">Аренда фотозоны</option>
+              <option value="set">Готовый фотосет</option>
+              <option value="documents">Фото на документы</option>
+              <option value="content">Контент-съёмка / бизнес</option>
+              <option value="other">Другое</option>
+            </select>
+          </div>
+
+          <!-- Smart fields -->
+          <div class="form-field" id="zoneField" style="display:none;">
+            <label for="zone">Зал</label>
+            <select id="zone" name="zone">
+              <option value="Светлый дом">Светлый дом</option>
+              <option value="Лофт">Лофт</option>
+              <option value="Классика">Классика</option>
+              <option value="Family">Family</option>
+            </select>
+          </div>
+
+          <div class="form-field" id="hoursField" style="display:none;">
+            <label for="hours">Длительность</label>
+            <select id="hours" name="hours">
+              <option value="1">1 час</option>
+              <option value="2">2 часа</option>
+              <option value="3">3 часа</option>
+              <option value="4">4 часа</option>
+              <option value="5">5 часов</option>
+            </select>
+          </div>
+
+          <div class="form-field form-field-full" id="docsField" style="display:none;">
+            <label for="docType">Тип документа</label>
+            <select id="docType" name="docType">
+              <option value="Паспорт РФ">Паспорт РФ</option>
+              <option value="Загранпаспорт">Загранпаспорт</option>
+              <option value="Военный билет">Военный билет</option>
+              <option value="Виза">Виза</option>
+              <option value="Другое">Другое</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="date">Дата *</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+
+          <div class="form-field">
+            <label for="time">Время *</label>
+            <input type="time" id="time" name="time" min="10:00" max="22:00" required>
+          </div>
+
+          <div class="form-field form-field-full">
+            <label for="photographer">Предпочитаемый фотограф</label>
+            <select id="photographer" name="photographer">
+              <option value="">Любой свободный</option>
+              <option value="Анна Ковалева">Анна Ковалева</option>
+              <option value="Дмитрий Мельник">Дмитрий Мельник</option>
+              <option value="Екатерина Власова">Екатерина Власова</option>
+            </select>
+          </div>
+
+          <div class="form-field form-field-full">
+            <label for="comment">Комментарий</label>
+            <textarea id="comment" name="comment" placeholder="Количество людей, пожелания по залу, нужна ли ретушь/визажист и т.д."></textarea>
+          </div>
+
+          <div class="form-footer">
+            <p class="form-note">Нажимая «Отправить», вы соглашаетесь на обработку персональных данных.</p>
+            <button type="submit" class="btn-primary">Отправить заявку</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © Дом фотографа, 2025. Все права защищены. Сайт носит ознакомительный характер и не является публичной офертой.
+</footer>
+
+<!-- Floating buttons (телефон/WA/VK) -->
+<div class="fab">
+  <a class="wa" target="_blank" rel="noopener"
+     href="https://wa.me/79383063525?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20%D1%84%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8E%20%C2%AB%D0%94%D0%BE%D0%BC%20%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B0%C2%BB">
+    WA
+  </a>
+  <a class="vk" target="_blank" rel="noopener" href="https://vk.com/dom_photografa">VK</a>
+  <a class="call" href="tel:+79383063525">CALL</a>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="galleryModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Галерея зала">
+    <div class="modal-top">
+      <div class="modal-title" id="modalTitle">Галерея</div>
+      <button class="modal-close" type="button" onclick="closeModal()">Закрыть ✕</button>
+    </div>
+    <div class="modal-main">
+      <img id="modalImage" src="" alt="Фото зала">
+      <div class="modal-nav">
+        <button type="button" onclick="prevModal()">← Предыдущее</button>
+        <button type="button" onclick="nextModal()">Следующее →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===========================
+  // Prices (настрой под себя)
+  // ===========================
+  const PRICES = {
+    halls: {
+      "Светлый дом": { weekday: 1300, weekend: 1500 },
+      "Лофт": { weekday: 1400, weekend: 1600 },
+      "Классика": { weekday: 1500, weekend: 1700 },
+      "Family": { weekday: 1300, weekend: 1500 }
+    },
+    photographers: {
+      none:  { name: "Без фотографа", perHour: 0 },
+      anna:  { name: "Анна Ковалева", perHour: 5000 },
+      dmitry:{ name: "Дмитрий Мельник", perHour: 5200 },
+      kate:  { name: "Екатерина Власова", perHour: 4200 }
+    },
+    retouch: { "0": 0, "10": 1500, "20": 2800, "30": 3900 },
+    makeup: 2500
+  };
+
+  // ===========================
+  // Galleries (замени на реальные фото)
+  // ===========================
+  const HALL_GALLERIES = {
+    svetly: [
+      "https://via.placeholder.com/1400x900?text=Светлый+дом+1",
+      "https://via.placeholder.com/1400x900?text=Светлый+дом+2",
+      "https://via.placeholder.com/1400x900?text=Светлый+дом+3",
+      "https://via.placeholder.com/1400x900?text=Светлый+дом+4"
+    ],
+    loft: [
+      "https://via.placeholder.com/1400x900?text=Лофт+1",
+      "https://via.placeholder.com/1400x900?text=Лофт+2",
+      "https://via.placeholder.com/1400x900?text=Лофт+3",
+      "https://via.placeholder.com/1400x900?text=Лофт+4"
+    ],
+    classic: [
+      "https://via.placeholder.com/1400x900?text=Классика+1",
+      "https://via.placeholder.com/1400x900?text=Классика+2",
+      "https://via.placeholder.com/1400x900?text=Классика+3",
+      "https://via.placeholder.com/1400x900?text=Классика+4"
+    ],
+    family: [
+      "https://via.placeholder.com/1400x900?text=Family+1",
+      "https://via.placeholder.com/1400x900?text=Family+2",
+      "https://via.placeholder.com/1400x900?text=Family+3",
+      "https://via.placeholder.com/1400x900?text=Family+4"
+    ]
+  };
+  const HALL_KEY_TO_NAME = { svetly:"Светлый дом", loft:"Лофт", classic:"Классика", family:"Family" };
+
+  // ===========================
+  // Map switcher (Google/Yandex) - works for both blocks
+  // ===========================
+  function switchMap(which, contacts=false){
+    const g = document.getElementById(contacts ? 'mapGoogle2' : 'mapGoogle');
+    const y = document.getElementById(contacts ? 'mapYandex2' : 'mapYandex');
+    const bg = document.getElementById(contacts ? 'btnMapGoogle2' : 'btnMapGoogle');
+    const by = document.getElementById(contacts ? 'btnMapYandex2' : 'btnMapYandex');
+
+    if(which === 'google'){
+      g.style.display = '';
+      y.style.display = 'none';
+      bg.classList.add('active');
+      by.classList.remove('active');
+    } else {
+      g.style.display = 'none';
+      y.style.display = '';
+      bg.classList.remove('active');
+      by.classList.add('active');
+    }
+  }
+  window.switchMap = switchMap;
+
+  // ===========================
+  // Modal
+  // ===========================
+  const modal = document.getElementById('galleryModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  let currentHallKey = null;
+  let currentIndex = 0;
+
+  function openHallGallery(hallKey){
+    currentHallKey = hallKey;
+    currentIndex = 0;
+    modalTitle.textContent = `Галерея: ${HALL_KEY_TO_NAME[hallKey] || 'Зал'}`;
+    modalImage.src = HALL_GALLERIES[hallKey][currentIndex];
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function openFromThumb(hallKey, idx){
+    currentHallKey = hallKey;
+    currentIndex = idx;
+    modalTitle.textContent = `Галерея: ${HALL_KEY_TO_NAME[hallKey] || 'Зал'}`;
+    modalImage.src = HALL_GALLERIES[hallKey][currentIndex];
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    currentHallKey = null;
+    currentIndex = 0;
+    modalImage.src = "";
+  }
+  function prevModal(){
+    if(!currentHallKey) return;
+    const arr = HALL_GALLERIES[currentHallKey];
+    currentIndex = (currentIndex - 1 + arr.length) % arr.length;
+    modalImage.src = arr[currentIndex];
+  }
+  function nextModal(){
+    if(!currentHallKey) return;
+    const arr = HALL_GALLERIES[currentHallKey];
+    currentIndex = (currentIndex + 1) % arr.length;
+    modalImage.src = arr[currentIndex];
+  }
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e)=>{
+    if(!modal.classList.contains('open')) return;
+    if(e.key === 'Escape') closeModal();
+    if(e.key === 'ArrowLeft') prevModal();
+    if(e.key === 'ArrowRight') nextModal();
+  });
+
+  // ===========================
+  // Smart booking form
+  // ===========================
+  const serviceEl = document.getElementById('service');
+  const zoneField = document.getElementById('zoneField');
+  const hoursField = document.getElementById('hoursField');
+  const docsField = document.getElementById('docsField');
+  const dateEl = document.getElementById('date');
+  const timeEl = document.getElementById('time');
+
+  function syncFields(){
+    const v = serviceEl.value;
+    zoneField.style.display = 'none';
+    hoursField.style.display = 'none';
+    docsField.style.display = 'none';
+
+    if(v === 'zone' || v === 'set' || v === 'content'){
+      zoneField.style.display = '';
+      hoursField.style.display = '';
+    }
+    if(v === 'documents'){
+      docsField.style.display = '';
+    }
+  }
+  serviceEl.addEventListener('change', syncFields);
+  syncFields();
+
+  // Min date = today
+  (function setMinDate(){
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    dateEl.min = `${yyyy}-${mm}-${dd}`;
+  })();
+
+  // Valid time 10:00–22:00
+  function isTimeValid(t){
+    if(!t) return false;
+    const parts = t.split(':');
+    if(parts.length !== 2) return false;
+    const hh = Number(parts[0]);
+    const mm = Number(parts[1]);
+    if(Number.isNaN(hh) || Number.isNaN(mm)) return false;
+    const mins = hh*60 + mm;
+    return mins >= 10*60 && mins <= 22*60;
+  }
+
+  // ===========================
+  // Send booking via mailto
+  // ===========================
+  document.getElementById('formBooking').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = this;
+
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const email = form.email.value.trim();
+    const service = form.service.value;
+    const date = form.date.value;
+    const time = form.time.value;
+
+    if(!name || !phone || !service || !date || !time){
+      alert('Пожалуйста, заполните все обязательные поля.');
+      return;
+    }
+    if(!isTimeValid(time)){
+      alert('Выберите время в диапазоне 10:00 — 22:00.');
+      return;
+    }
+
+    const zone = form.zone ? form.zone.value : '';
+    const hours = form.hours ? form.hours.value : '';
+    const docType = form.docType ? form.docType.value : '';
+    const photographer = form.photographer ? form.photographer.value : '';
+    const comment = form.comment ? form.comment.value.trim() : '';
+
+    const serviceMap = {
+      zone: 'Аренда фотозоны',
+      set: 'Готовый фотосет',
+      documents: 'Фото на документы',
+      content: 'Контент-съёмка / бизнес',
+      other: 'Другое'
+    };
+    const serviceLabel = serviceMap[service] || service;
+
+    let body =
+`Новая заявка с сайта "Дом фотографа"
+
+Имя: ${name}
+Телефон: ${phone}
+E-mail: ${email || '-'}
+
+Услуга: ${serviceLabel}
+Дата: ${date}
+Время: ${time}
+`;
+
+    if(service === 'zone' || service === 'set' || service === 'content'){
+      body += `Зал: ${zone || '-'}\n`;
+      body += `Длительность: ${hours || '-'}\n`;
+    }
+    if(service === 'documents'){
+      body += `Тип документа: ${docType || '-'}\n`;
+    }
+    if(photographer) body += `Фотограф: ${photographer}\n`;
+    if(comment) body += `\nКомментарий:\n${comment}\n`;
+
+    body += `\nАдрес студии: Февральская ул., 54, Пятигорск (А301, этаж 3)\n`;
+    body += `Телефон студии: +7 (938) 306-35-25\n`;
+
+    const subject = encodeURIComponent('Заявка с сайта «Дом фотографа»');
+    const mailBody = encodeURIComponent(body);
+    window.location.href = `mailto:d2991896@gmail.com?subject=${subject}&body=${mailBody}`;
+
+    form.reset();
+    syncFields();
+  });
+
+  // ===========================
+  // Calculator
+  // ===========================
+  const calcHall = document.getElementById('calcHall');
+  const calcHours = document.getElementById('calcHours');
+  const calcPhotographer = document.getElementById('calcPhotographer');
+  const calcPhotoHours = document.getElementById('calcPhotoHours');
+  const calcRetouch = document.getElementById('calcRetouch');
+  const calcMakeup = document.getElementById('calcMakeup');
+  const calcWeekend = document.getElementById('calcWeekend');
+  const calcFreeHour = document.getElementById('calcFreeHour');
+
+  const sumHallEl = document.getElementById('sumHall');
+  const sumPhotEl = document.getElementById('sumPhotographer');
+  const sumRetEl = document.getElementById('sumRetouch');
+  const sumMakeupEl = document.getElementById('sumMakeup');
+  const sumTotalEl = document.getElementById('sumTotal');
+
+  function rub(n){
+    const x = Math.max(0, Math.round(n));
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ') + ' ₽';
+  }
+
+  function calcTotal(){
+    const hallName = calcHall.value;
+    const hours = Number(calcHours.value);
+    const isWeekend = !!calcWeekend.checked;
+    const hallRate = isWeekend ? PRICES.halls[hallName].weekend : PRICES.halls[hallName].weekday;
+
+    let paidHallHours = hours;
+    if(calcFreeHour.checked && hours >= 5) paidHallHours = hours - 1;
+
+    const hallSum = hallRate * paidHallHours;
+
+    const photKey = calcPhotographer.value;
+    const photRate = PRICES.photographers[photKey].perHour;
+    const photHours = photKey === 'none' ? 0 : Number(calcPhotoHours.value);
+    const photSum = photRate * photHours;
+
+    const retouchSum = PRICES.retouch[String(calcRetouch.value)] || 0;
+    const makeupSum = calcMakeup.checked ? PRICES.makeup : 0;
+
+    const total = hallSum + photSum + retouchSum + makeupSum;
+
+    sumHallEl.textContent = rub(hallSum);
+    sumPhotEl.textContent = rub(photSum);
+    sumRetEl.textContent = rub(retouchSum);
+    sumMakeupEl.textContent = rub(makeupSum);
+    sumTotalEl.textContent = rub(total);
+
+    calcPhotoHours.disabled = (photKey === 'none');
+  }
+
+  [calcHall, calcHours, calcPhotographer, calcPhotoHours, calcRetouch, calcMakeup, calcWeekend, calcFreeHour]
+    .forEach(el => el.addEventListener('change', calcTotal));
+  calcTotal();
+
+  function applyCalcToBooking(){
+    document.getElementById('booking-form').scrollIntoView({behavior:'smooth'});
+    const photKey = calcPhotographer.value;
+    const hallName = calcHall.value;
+    const hours = calcHours.value;
+
+    if(photKey === 'none'){
+      serviceEl.value = 'zone';
+      syncFields();
+      document.getElementById('zone').value = hallName;
+      document.getElementById('hours').value = hours;
+      document.getElementById('photographer').value = '';
+    } else {
+      serviceEl.value = 'set';
+      syncFields();
+      document.getElementById('zone').value = hallName;
+      document.getElementById('hours').value = hours;
+      document.getElementById('photographer').value = PRICES.photographers[photKey].name;
+    }
+
+    const c = document.getElementById('comment');
+    const retouchLabel = calcRetouch.value === "0" ? "без ретуши" : `${calcRetouch.value} фото`;
+    const makeupLabel = calcMakeup.checked ? "визажист: да" : "визажист: нет";
+    const dayLabel = calcWeekend.checked ? "тариф: выходной" : "тариф: будни";
+    const promoLabel = (calcFreeHour.checked && Number(calcHours.value) >= 5) ? "акция: 5-й час бесплатно" : "акция: нет";
+
+    const note =
+`Расчёт с калькулятора:
+- зал: ${hallName}
+- часы аренды: ${calcHours.value} (оплата: ${dayLabel}, ${promoLabel})
+- фотограф: ${PRICES.photographers[calcPhotographer.value].name} (${calcPhotographer.value === 'none' ? 'нет' : calcPhotoHours.value + ' ч.'})
+- ретушь: ${retouchLabel}
+- ${makeupLabel}
+- итого: ${sumTotalEl.textContent}
+`;
+
+    c.value = (c.value.trim() ? (c.value.trim() + "\n\n") : "") + note;
+  }
+
+  function prefillCalc({hall, hours, photographer} = {}){
+    if(hall) calcHall.value = hall;
+    if(hours) calcHours.value = String(hours);
+    if(photographer) calcPhotographer.value = photographer;
+    document.getElementById('calculator').scrollIntoView({behavior:'smooth'});
+    calcTotal();
+  }
+
+  function prefillBooking({service, hall, hours, docType, photographer, comment} = {}){
+    document.getElementById('booking-form').scrollIntoView({behavior:'smooth'});
+    if(service) serviceEl.value = service;
+    syncFields();
+    if(hall && document.getElementById('zone')) document.getElementById('zone').value = hall;
+    if(hours && document.getElementById('hours')) document.getElementById('hours').value = String(hours);
+    if(docType && document.getElementById('docType')) document.getElementById('docType').value = docType;
+    if(photographer && document.getElementById('photographer')) document.getElementById('photographer').value = photographer;
+
+    if(comment){
+      const c = document.getElementById('comment');
+      c.value = (c.value.trim() ? (c.value.trim() + "\n") : "") + comment;
+    }
+  }
+
+  // expose
+  window.openHallGallery = openHallGallery;
+  window.openFromThumb = openFromThumb;
+  window.closeModal = closeModal;
+  window.prevModal = prevModal;
+  window.nextModal = nextModal;
+  window.applyCalcToBooking = applyCalcToBooking;
+  window.prefillBooking = prefillBooking;
+  window.prefillCalc = prefillCalc;
+</script>
+</body>
+</html>
