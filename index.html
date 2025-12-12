@@ -263,7 +263,7 @@
       flex-direction:column;
       min-height:100%;
     }
-    .hall-cover{ width:100%; height:190px; object-fit:cover; background:#e5e7eb; display:block; }
+    .hall-cover{ width:100%; aspect-ratio:16 / 9; height:auto; object-fit:cover; object-position:center; background:#e5e7eb; display:block; }
     .hall-body{ padding:14px 14px 16px; display:grid; gap:10px; }
     .hall-title{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
     .hall-title h3{ font-size:1.05rem; }
@@ -289,8 +289,10 @@
     .thumbs{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
     .thumbs img{
       width:100%;
-      height:80px;
+      aspect-ratio: 4 / 3;
+      height:auto;
       object-fit:cover;
+      object-position:center;
       border-radius:10px;
       cursor:pointer;
       background:#e5e7eb;
@@ -408,10 +410,11 @@
     }
     .photographer-photo{
       width:100%;
-      height:220px;
-      object-fit:cover;
+      aspect-ratio: 3 / 4;
+      height:auto;
+      object-fit:contain;
+      background:#f3f4f6;
       border-radius:12px;
-      background:#e5e7eb;
       display:block;
     }
     .photographer-header{ display:flex; gap:12px; align-items:center; }
@@ -749,7 +752,7 @@
         <h3 style="margin-top:14px;">Быстрый выбор зала</h3>
         <div class="zones-grid">
           <div class="zone-card">
-            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Светлый+дом" alt="Светлый дом" loading="lazy">
+            <img src="assets/images/svet1.jpg" alt="Светлый дом" loading="lazy">
             <div class="zone-card-body">
               <div>
                 <h4>«Светлый дом»</h4>
@@ -763,7 +766,7 @@
           </div>
 
           <div class="zone-card">
-            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Лофт" alt="Лофт" loading="lazy">
+            <img src="assets/images/loft1.jpg" alt="Лофт" loading="lazy">
             <div class="zone-card-body">
               <div>
                 <h4>«Лофт»</h4>
@@ -777,7 +780,7 @@
           </div>
 
           <div class="zone-card">
-            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Классика" alt="Классика" loading="lazy">
+            <img src="assets/images/class1.jpg" alt="Классика" loading="lazy">
             <div class="zone-card-body">
               <div>
                 <h4>«Классика»</h4>
@@ -791,7 +794,7 @@
           </div>
 
           <div class="zone-card">
-            <img src="https://via.placeholder.com/800x500?text=Фото+зоны:+Family" alt="Family" loading="lazy">
+            <img src="assets/images/fam1.jpg" alt="Family" loading="lazy">
             <div class="zone-card-body">
               <div>
                 <h4>«Family»</h4>
@@ -866,7 +869,7 @@
     <div class="halls-grid">
       <!-- Svetly -->
       <article class="hall-card">
-        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Светлый+дом" alt="Зал Светлый дом" loading="lazy">
+        <img class="hall-cover" src="assets/images/svet1.jpg" alt="Зал Светлый дом" loading="lazy">
         <div class="hall-body">
           <div class="hall-title">
             <h3>«Светлый дом»</h3>
@@ -899,9 +902,9 @@
       
 
             <div class="thumbs" data-hall="svetly">
-              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+1" alt="Светлый дом 1" loading="lazy" onclick="openFromThumb('svetly',0)">
-              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+2" alt="Светлый дом 2" loading="lazy" onclick="openFromThumb('svetly',1)">
-              <img src="https://via.placeholder.com/900x600?text=Светлый+дом+3" alt="Светлый дом 3" loading="lazy" onclick="openFromThumb('svetly',2)">
+              <img src="assets/images/svet1.jpg" alt="Светлый дом 1" loading="lazy" onclick="openFromThumb('svetly',0)">
+              <img src="assets/images/svet2.jpg" alt="Светлый дом 2" loading="lazy" onclick="openFromThumb('svetly',1)">
+              <img src="assets/images/svet3.jpg" alt="Светлый дом 3" loading="lazy" onclick="openFromThumb('svetly',2)">
             </div>
 
             <div class="zone-actions">
@@ -914,7 +917,7 @@
 
       <!-- Loft -->
       <article class="hall-card">
-        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Лофт" alt="Зал Лофт" loading="lazy">
+        <img class="hall-cover" src="assets/images/loft1.jpg" alt="Зал Лофт" loading="lazy">
         <div class="hall-body">
           <div class="hall-title">
             <h3>«Лофт»</h3>
@@ -947,9 +950,9 @@
             
 
             <div class="thumbs" data-hall="loft">
-              <img src="https://via.placeholder.com/900x600?text=Лофт+1" alt="Лофт 1" loading="lazy" onclick="openFromThumb('loft',0)">
-              <img src="https://via.placeholder.com/900x600?text=Лофт+2" alt="Лофт 2" loading="lazy" onclick="openFromThumb('loft',1)">
-              <img src="https://via.placeholder.com/900x600?text=Лофт+3" alt="Лофт 3" loading="lazy" onclick="openFromThumb('loft',2)">
+              <img src="assets/images/loft1.jpg" alt="Лофт 1" loading="lazy" onclick="openFromThumb('loft',0)">
+              <img src="assets/images/loft2.jpg" alt="Лофт 2" loading="lazy" onclick="openFromThumb('loft',1)">
+              <img src="assets/images/loft3.jpg" alt="Лофт 3" loading="lazy" onclick="openFromThumb('loft',2)">
             </div>
 
             <div class="zone-actions">
@@ -962,7 +965,7 @@
 
       <!-- Classic -->
       <article class="hall-card">
-        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Классика" alt="Зал Классика" loading="lazy">
+        <img class="hall-cover" src="assets/images/class1.jpg" alt="Зал Классика" loading="lazy">
         <div class="hall-body">
           <div class="hall-title">
             <h3>«Классика»</h3>
@@ -995,9 +998,9 @@
             
 
             <div class="thumbs" data-hall="classic">
-              <img src="https://via.placeholder.com/900x600?text=Классика+1" alt="Классика 1" loading="lazy" onclick="openFromThumb('classic',0)">
-              <img src="https://via.placeholder.com/900x600?text=Классика+2" alt="Классика 2" loading="lazy" onclick="openFromThumb('classic',1)">
-              <img src="https://via.placeholder.com/900x600?text=Классика+3" alt="Классика 3" loading="lazy" onclick="openFromThumb('classic',2)">
+              <img src="assets/images/class1.jpg" alt="Классика 1" loading="lazy" onclick="openFromThumb('classic',0)">
+              <img src="assets/images/class2.jpg" alt="Классика 2" loading="lazy" onclick="openFromThumb('classic',1)">
+              <img src="assets/images/class3.jpg" alt="Классика 3" loading="lazy" onclick="openFromThumb('classic',2)">
             </div>
 
             <div class="zone-actions">
@@ -1010,7 +1013,7 @@
 
       <!-- Family -->
       <article class="hall-card">
-        <img class="hall-cover" src="https://via.placeholder.com/1000x700?text=Зал:+Family" alt="Зал Family" loading="lazy">
+        <img class="hall-cover" src="assets/images/fam1.jpg" alt="Зал Family" loading="lazy">
         <div class="hall-body">
           <div class="hall-title">
             <h3>«Family»</h3>
@@ -1043,9 +1046,9 @@
             
 
             <div class="thumbs" data-hall="family">
-              <img src="https://via.placeholder.com/900x600?text=Family+1" alt="Family 1" loading="lazy" onclick="openFromThumb('family',0)">
-              <img src="https://via.placeholder.com/900x600?text=Family+2" alt="Family 2" loading="lazy" onclick="openFromThumb('family',1)">
-              <img src="https://via.placeholder.com/900x600?text=Family+3" alt="Family 3" loading="lazy" onclick="openFromThumb('family',2)">
+              <img src="assets/images/fam1.jpg" alt="Family 1" loading="lazy" onclick="openFromThumb('family',0)">
+              <img src="assets/images/fam2.jpg" alt="Family 2" loading="lazy" onclick="openFromThumb('family',1)">
+              <img src="assets/images/fam3.jpg" alt="Family 3" loading="lazy" onclick="openFromThumb('family',2)">
             </div>
 
             <div class="zone-actions">
@@ -1397,7 +1400,7 @@
 
     <div class="photographers-grid">
       <div class="photographer-card">
-        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Анна+Ковалева" alt="Анна Ковалева" loading="lazy">
+        <img class="photographer-photo" src="assets/images/foto1.jpg" alt="Анна Ковалева" loading="lazy">
         <div class="photographer-header">
           <div class="photographer-avatar">АК</div>
           <div>
@@ -1418,7 +1421,7 @@
       </div>
 
       <div class="photographer-card">
-        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Дмитрий+Мельник" alt="Дмитрий Мельник" loading="lazy">
+        <img class="photographer-photo" src="assets/images/foto2.jpg" alt="Дмитрий Мельник" loading="lazy">
         <div class="photographer-header">
           <div class="photographer-avatar">ДМ</div>
           <div>
@@ -1439,7 +1442,7 @@
       </div>
 
       <div class="photographer-card">
-        <img class="photographer-photo" src="https://via.placeholder.com/900x1200?text=Фото:+Екатерина+Власова" alt="Екатерина Власова" loading="lazy">
+        <img class="photographer-photo" src="assets/images/foto3.jpg" alt="Екатерина Власова" loading="lazy">
         <div class="photographer-header">
           <div class="photographer-avatar">ЕВ</div>
           <div>
@@ -1464,9 +1467,7 @@
   <!-- CONTACTS -->
   <section id="contacts">
     <h2 class="section-title">Контакты и онлайн‑запись</h2>
-    <p class="section-subtitle">
-      Оставьте заявку — она сформируется и отправится на почту <strong>d2991896@gmail.com</strong> (через mailto, без сервера).
-    </p>
+    
 
     <div class="contacts-layout">
       <div class="contacts-card">
@@ -1477,7 +1478,7 @@
           <li><span class="contacts-label">Телефон:</span> <a href="tel:+79383063525">+7 (938) 306-35-25</a></li>
           <li><span class="contacts-label">График:</span> ежедневно, 10:00–22:00</li>
           <li><span class="contacts-label">VK:</span> <a href="https://vk.com/dom_photografa" target="_blank" rel="noopener">vk.com/dom_photografa</a></li>
-          <li><span class="contacts-label">E‑mail:</span> d2991896@gmail.com</li>
+        
         </ul>
 
         <div class="vk-card" aria-label="Карточка ВКонтакте">
@@ -1694,34 +1695,16 @@
   };
 
   // ===========================
-  // Galleries (замени на реальные фото)
+  // Galleries (автосбор из миниатюр в карточках)
   // ===========================
-  const HALL_GALLERIES = {
-    svetly: [
-      "https://via.placeholder.com/1400x900?text=Светлый+дом+1",
-      "https://via.placeholder.com/1400x900?text=Светлый+дом+2",
-      "https://via.placeholder.com/1400x900?text=Светлый+дом+3",
-      "https://via.placeholder.com/1400x900?text=Светлый+дом+4"
-    ],
-    loft: [
-      "https://via.placeholder.com/1400x900?text=Лофт+1",
-      "https://via.placeholder.com/1400x900?text=Лофт+2",
-      "https://via.placeholder.com/1400x900?text=Лофт+3",
-      "https://via.placeholder.com/1400x900?text=Лофт+4"
-    ],
-    classic: [
-      "https://via.placeholder.com/1400x900?text=Классика+1",
-      "https://via.placeholder.com/1400x900?text=Классика+2",
-      "https://via.placeholder.com/1400x900?text=Классика+3",
-      "https://via.placeholder.com/1400x900?text=Классика+4"
-    ],
-    family: [
-      "https://via.placeholder.com/1400x900?text=Family+1",
-      "https://via.placeholder.com/1400x900?text=Family+2",
-      "https://via.placeholder.com/1400x900?text=Family+3",
-      "https://via.placeholder.com/1400x900?text=Family+4"
-    ]
-  };
+  const HALL_GALLERIES = {};
+  document.querySelectorAll('.thumbs[data-hall]').forEach((wrap) => {
+    const key = wrap.dataset.hall;
+    const imgs = [...wrap.querySelectorAll('img')]
+      .map(img => img.getAttribute('src'))
+      .filter(Boolean);
+    HALL_GALLERIES[key] = imgs;
+  });
   const HALL_KEY_TO_NAME = { svetly:"Светлый дом", loft:"Лофт", classic:"Классика", family:"Family" };
 
   // ===========================
@@ -1757,18 +1740,28 @@
   let currentIndex = 0;
 
   function openHallGallery(hallKey){
+    const arr = HALL_GALLERIES[hallKey] || [];
+    if(!arr.length){
+      alert('Для этого зала пока нет фото. Проверь src у миниатюр в карточке.');
+      return;
+    }
     currentHallKey = hallKey;
     currentIndex = 0;
     modalTitle.textContent = `Галерея: ${HALL_KEY_TO_NAME[hallKey] || 'Зал'}`;
-    modalImage.src = HALL_GALLERIES[hallKey][currentIndex];
+    modalImage.src = arr[currentIndex];
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
   }
   function openFromThumb(hallKey, idx){
+    const arr = HALL_GALLERIES[hallKey] || [];
+    if(!arr.length){
+      alert('Для этого зала пока нет фото. Проверь src у миниатюр в карточке.');
+      return;
+    }
     currentHallKey = hallKey;
-    currentIndex = idx;
+    currentIndex = Math.max(0, Math.min(idx, arr.length - 1));
     modalTitle.textContent = `Галерея: ${HALL_KEY_TO_NAME[hallKey] || 'Зал'}`;
-    modalImage.src = HALL_GALLERIES[hallKey][currentIndex];
+    modalImage.src = arr[currentIndex];
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
   }
@@ -2047,5 +2040,54 @@ E-mail: ${email || '-'}
   window.prefillBooking = prefillBooking;
   window.prefillCalc = prefillCalc;
 </script>
+<script>
+  const bookingForm = document.getElementById('booking-form');
+
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function (e) {
+      e.preventDefault(); // ❗ не отправляем реально
+
+      // Можно тут собрать данные, если понадобится позже
+      // const data = new FormData(bookingForm);
+
+      // Имитируем отправку (небольшая задержка для реализма)
+      setTimeout(() => {
+        showBookingSuccess();
+        bookingForm.reset();
+      }, 600);
+    });
+  }
+
+  function showBookingSuccess() {
+    // если сообщение уже есть — не дублируем
+    if (document.getElementById('booking-success')) return;
+
+    const msg = document.createElement('div');
+    msg.id = 'booking-success';
+    msg.innerHTML = `
+      <strong>Заявка отправлена ✅</strong><br>
+      Мы свяжемся с вами в ближайшее время.
+    `;
+
+    msg.style.cssText = `
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #ecfccb;
+      color: #365314;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    `;
+
+    bookingForm.appendChild(msg);
+
+    // автоскрытие через 6 секунд (по желанию)
+    setTimeout(() => {
+      msg.remove();
+    }, 6000);
+  }
+</script>
+
+
 </body>
 </html>
